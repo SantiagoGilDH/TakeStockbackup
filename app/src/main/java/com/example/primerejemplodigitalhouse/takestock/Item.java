@@ -5,6 +5,7 @@ public class Item {
     private String name;
     private Integer stock;
     private Integer minimumPurchaceQuantity;
+    private Integer image;
 
     public Item(String name) {
         this.name = name;
