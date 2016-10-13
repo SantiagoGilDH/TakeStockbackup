@@ -2,17 +2,14 @@ package com.example.primerejemplodigitalhouse.takestock;
 
 import java.util.Date;
 
-/**
- * Created by digitalhouse on 13/10/16.
- */
 public class Purchace {
 
     private Date dateOfPurchace;
     private Item item;
     private Integer quantity;
 
-    public Purchace(Date dateOfPurchace, Item item, Integer quantity) {
-        this.dateOfPurchace = dateOfPurchace;
+    public Purchace(Item item, Integer quantity) {
+        this.dateOfPurchace = new Date();
         this.item = item;
         this.quantity = quantity;
         updateStock();

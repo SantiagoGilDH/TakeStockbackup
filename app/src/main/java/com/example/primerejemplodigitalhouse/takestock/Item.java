@@ -1,13 +1,10 @@
 package com.example.primerejemplodigitalhouse.takestock;
 
-/**
- * Created by digitalhouse on 13/10/16.
- */
 public class Item {
 
     private String name;
     private Integer stock;
-    private Integer minimumPurchace;
+    private Integer minimumPurchaceQuantity;
 
     public Item(String name) {
         this.name = name;
@@ -21,8 +18,8 @@ public class Item {
         return stock;
     }
 
-    public Integer getMinimumPurchace() {
-        return minimumPurchace;
+    public Integer getMinimumPurchaceQuantity() {
+        return minimumPurchaceQuantity;
     }
 
     public void setStock(Integer stock) {
