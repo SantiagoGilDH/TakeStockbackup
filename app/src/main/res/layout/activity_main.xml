@@ -10,22 +10,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.primerejemplodigitalhouse.takestock.MainActivity">
 
-    <EditText
-        android:id="@+id/editTextItem"
+    <FrameLayout
+        android:id="@+id/fragment_holder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Artículo" />
+        android:layout_height="match_parent"></FrameLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingresar Nuevo"
-        android:onClick="createNewItem"/>
 
-    <ListView
-        android:id="@+id/listViewItems"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"></ListView>
 
 
 </LinearLayout>

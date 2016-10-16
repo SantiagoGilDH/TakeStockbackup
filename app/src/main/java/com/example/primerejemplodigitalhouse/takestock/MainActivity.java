@@ -1,5 +1,9 @@
 package com.example.primerejemplodigitalhouse.takestock;
 
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,13 +30,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         itemsDAO = new ItemsDAO(this);
-        listView = (ListView) findViewById(R.id.listViewItems);
         editTextItemName = (EditText) findViewById(R.id.editTextItem);
         items = itemsDAO.getItems();
 
-        ListViewItemAdapter adapter = new ListViewItemAdapter(items, this);
-
-        listView.setAdapter(adapter);
+        Fragment fragmentMainView = new FragmentMainView();
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_holder, fragmentMainView);
+        fragmentTransaction.commit();
 
 
     }
