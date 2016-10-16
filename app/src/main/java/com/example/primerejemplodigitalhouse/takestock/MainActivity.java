@@ -5,18 +5,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.primerejemplodigitalhouse.takestock.dao.ItemsDAO;
 import com.example.primerejemplodigitalhouse.takestock.models.Item;
 import com.example.primerejemplodigitalhouse.takestock.models.ListViewItemAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
-    private EditText editText;
+    private EditText editTextItemName;
+    private ItemsDAO itemsDAO;
     private List<Item> items;
 
     @Override
@@ -24,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        items = new ArrayList<>();
+        itemsDAO = new ItemsDAO(this);
         listView = (ListView) findViewById(R.id.listViewItems);
-        editText = (EditText) findViewById(R.id.editTextItem);
+        editTextItemName = (EditText) findViewById(R.id.editTextItem);
+        items = itemsDAO.getItems();
 
         ListViewItemAdapter adapter = new ListViewItemAdapter(items, this);
 
@@ -37,12 +39,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void createNewItem(View view){
 
-        String itemName = editText.getText().toString();
-        Item item = new Item(itemName);
-        items.add(item);
-        listView.deferNotifyDataSetChanged();
-        ItemsDAO itemsDAO = new ItemsDAO(this);
-        itemsDAO.addItem(item);
+        if(editTextItemName.getText().equals("")){
+            Toast.makeText(MainActivity.this, "Write an item name", Toast.LENGTH_SHORT).show();
+        } else{
 
+            String itemName = editTextItemName.getText().toString();
+            editTextItemName.setText("");
+            Item item = new Item(itemName);
+            itemsDAO.addItemToDatabase(item);
+            items.add(item);
+            listView.deferNotifyDataSetChanged();
+            Toast.makeText(MainActivity.this, item.getName() + " has been added.", Toast.LENGTH_SHORT).show();
+
+        }
     }
 }

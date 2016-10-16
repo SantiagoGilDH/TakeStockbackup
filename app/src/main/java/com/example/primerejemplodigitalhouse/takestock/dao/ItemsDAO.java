@@ -2,6 +2,7 @@ package com.example.primerejemplodigitalhouse.takestock.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -18,7 +19,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
     private static final String DATABASENAME = "TakeStockDB";
     private static final Integer DATABASEVERSION = 1;
 
-    private static final String ITEMSTABLE = "Items";
+    private static final String TABLEITEMS = "Items";
     private static final String ID = "ID";
     private static final String NAME = "Name"  ;
     private static final String STOCK = "Stock" ;
@@ -35,7 +36,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String createTable = "CREATE TABLE " + ITEMSTABLE + "("
+        String createTable = "CREATE TABLE " + TABLEITEMS + "("
                 + ID + " INTEGER PRIMARY KEY,"
                 + NAME + " TEXT,"
                 + STOCK + " NUMBER,"
@@ -52,7 +53,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
 
     }
 
-    public void addItem(Item item) {
+    public void addItemToDatabase(Item item) {
 
         SQLiteDatabase database = getWritableDatabase();
 
@@ -63,7 +64,31 @@ public class ItemsDAO extends SQLiteOpenHelper{
         row.put(IMAGE, item.getImage());
         row.put(MINIMUMPURCHACEQUANTITY, item.getMinimumPurchaceQuantity());
 
-        database.insert(ITEMSTABLE, null, row);
+        database.insert(TABLEITEMS, null, row);
         database.close();
     }
-}
+
+    public List<Item> getItems(){
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLEITEMS;
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        List<Item> items = new ArrayList<>();
+        while (cursor.moveToNext()){
+
+            Item item = new Item();
+            item.setID(cursor.getInt(cursor.getColumnIndex(ID)));
+            item.setImage(cursor.getInt(cursor.getColumnIndex(IMAGE)));
+            item.setMinimumPurchaceQuantity(cursor.getInt(cursor.getColumnIndex(MINIMUMPURCHACEQUANTITY)));
+            item.setName(cursor.getString(cursor.getColumnIndex(NAME)));
+            item.setStock(cursor.getInt(cursor.getColumnIndex(STOCK)));
+
+            items.add(item);
+        }
+
+        database.close();
+        return items;
+     }
+ }

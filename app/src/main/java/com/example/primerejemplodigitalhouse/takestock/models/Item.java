@@ -9,6 +9,10 @@ public class Item {
     private Integer image;
 
 
+    public Item(){
+
+    }
+
     public Item(String name) {
         this.name = name;
         minimumPurchaceQuantity = 1;
@@ -37,5 +41,21 @@ public class Item {
 
     public Integer getImage() {
         return image;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMinimumPurchaceQuantity(Integer minimumPurchaceQuantity) {
+        this.minimumPurchaceQuantity = minimumPurchaceQuantity;
+    }
+
+    public void setImage(Integer image) {
+        this.image = image;
     }
 }
