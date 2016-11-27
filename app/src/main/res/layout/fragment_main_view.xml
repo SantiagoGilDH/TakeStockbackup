@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editTextItem"
+        android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Artículo" />
@@ -17,6 +17,7 @@
         />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewItems"
         android:layout_width="match_parent"
         android:layout_height="300dp">
 

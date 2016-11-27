@@ -28,9 +28,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        itemsController = new ItemsController();
-        items = itemsController.getItems(this);
-
         Fragment fragmentMainView = new FragmentMainView();
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
