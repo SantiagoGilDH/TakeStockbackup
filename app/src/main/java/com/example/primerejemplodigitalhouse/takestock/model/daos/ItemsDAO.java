@@ -37,7 +37,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         String createTable = "CREATE TABLE " + TABLEITEMS + "("
-                + ID + " INTEGER PRIMARY KEY,"
+                + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + NAME + " TEXT,"
                 + STOCK + " NUMBER,"
                 + IMAGE + " TEXT, "
@@ -83,7 +83,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
             item.setImage(cursor.getInt(cursor.getColumnIndex(IMAGE)));
             item.setMinimumPurchaceQuantity(cursor.getInt(cursor.getColumnIndex(MINIMUMPURCHACEQUANTITY)));
             item.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-            item.setStock(cursor.getInt(cursor.getColumnIndex(STOCK)));
+            item.setStock((Integer) cursor.getInt(cursor.getColumnIndex(STOCK)));
 
             items.add(item);
         }
@@ -91,4 +91,29 @@ public class ItemsDAO extends SQLiteOpenHelper{
         database.close();
         return items;
      }
+
+    public void addOneToItem(Item item){
+
+        SQLiteDatabase database = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(STOCK, item.getStock() + 1);
+
+        database.update(TABLEITEMS,  contentValues, ID + " = " + item.getID(), null);
+
+        database.close();
+    }
+
+    public void substractOneFromItem(Item item){
+
+        SQLiteDatabase database = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(STOCK, item.getStock() - 1);
+
+        database.update(TABLEITEMS, contentValues, ID + " = " + item.getID(), null);
+
+        database.close();
+
+    }
  }

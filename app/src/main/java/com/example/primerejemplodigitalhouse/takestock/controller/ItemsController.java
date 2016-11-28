@@ -21,4 +21,17 @@ public class ItemsController {
         ItemsDAO itemsDao = new ItemsDAO(context);
         itemsDao.addItemToDatabase(item);
     }
+
+    public void addOneToItem(Context context, Item item){
+
+        ItemsDAO itemsDao = new ItemsDAO(context);
+        itemsDao.addOneToItem(item);
+
+    }
+
+    public void substractOneFromItem(Context context, Item item){
+
+        ItemsDAO itemsDAO = new ItemsDAO(context);
+        itemsDAO.substractOneFromItem(item);
+    }
 }

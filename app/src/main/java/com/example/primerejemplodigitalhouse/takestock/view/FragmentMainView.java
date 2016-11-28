@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,21 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.primerejemplodigitalhouse.takestock.R;
 import com.example.primerejemplodigitalhouse.takestock.controller.ItemsController;
 import com.example.primerejemplodigitalhouse.takestock.model.pojos.Item;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**
  * Created by lab on 16-Oct-16.
  */
-public class FragmentMainView extends Fragment{
+public class FragmentMainView extends Fragment implements View.OnClickListener{
 
     private ItemsController itemsController;
     private RecyclerView recyclerView;
@@ -63,7 +59,7 @@ public class FragmentMainView extends Fragment{
         });
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewItems);
-        itemRecyclerAdapter = new ItemRecyclerAdapter(itemsController.getItems(getContext()), getContext());
+        itemRecyclerAdapter = new ItemRecyclerAdapter(itemsController.getItems(getContext()), getContext(), this);
         recyclerView.setAdapter(itemRecyclerAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -72,7 +68,14 @@ public class FragmentMainView extends Fragment{
         return view;
 
         }
+
+    @Override
+    public void onClick(View view) {
+        itemRecyclerAdapter.setItems(itemsController.getItems(getContext()));
+        itemRecyclerAdapter.notifyDataSetChanged();
+        Toast.makeText(getContext(), "Se ha hecho Click", Toast.LENGTH_SHORT).show();
     }
+}
 
 //TODO  quitar Appbar
 //TODO manejar comportamiento del teclado
