@@ -4,13 +4,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:layout_margin="10dp"
+    android:layout_margin="5dp"
     app:cardCornerRadius="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:textSize="18dp">
 
         <Button
             android:id="@+id/buttonSubtract"
@@ -26,11 +27,13 @@
             android:layout_height="wrap_content"
             android:text="Descripción"
             android:layout_margin="5dp"
+            android:textSize="18dp"
             android:layout_toRightOf="@+id/buttonSubtract"
             android:layout_centerVertical="true"
             />
 
         <TextView
+            android:textSize="18dp"
             android:id="@+id/textViewX"
             android:layout_toRightOf="@+id/textViewItemName"
             android:layout_width="wrap_content"
@@ -45,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            android:textSize="18dp"
             android:layout_toRightOf="@+id/textViewX"
             android:layout_margin="5dp"
             android:layout_centerVertical="true"
@@ -55,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
+            android:textSize="18dp"
             android:layout_alignParentRight="true"
             />
 
