@@ -22,20 +22,25 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter implements View.On
 
     private List<Item> items;
     private Context context;
-    private View.OnClickListener listener;
+    private View.OnClickListener onStockModifiedListener;
+    private View.OnClickListener onTouchedItemListener;
 
-    public ItemRecyclerAdapter(List<Item> items, Context context, View.OnClickListener listener) {
+    public ItemRecyclerAdapter(List<Item> items, Context context, View.OnClickListener onStockModifiedListener, View.OnClickListener onTouchedItemListener) {
         this.items = items;
         this.context = context;
-        this.listener = listener;
+        this.onStockModifiedListener = onStockModifiedListener;
+        this.onTouchedItemListener = onTouchedItemListener;
 
     }
+
+    public Item getItemAtPosition(Integer position){return items.get(position);}
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_card_view, parent, false);
-        ItemViewHolder itemViewHolder = new ItemViewHolder(view, context, listener);
+        view.setOnClickListener(onTouchedItemListener);
+        ItemViewHolder itemViewHolder = new ItemViewHolder(view, context, onStockModifiedListener);
         return itemViewHolder;
     }
 
@@ -61,6 +66,10 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter implements View.On
 
     }
 
+    public interface OnItemClickedListener {
+        void onItemClick(Item item);
+    }
+
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewItemName;
@@ -69,17 +78,19 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter implements View.On
         private Button buttonAdd;
         private Context context;
         private Item item;
-        private View.OnClickListener listener;
+        private View.OnClickListener onStockModifiedListener;
 
-        public ItemViewHolder(View itemView, Context context, View.OnClickListener listener) {
+        public ItemViewHolder(View itemView, Context context, View.OnClickListener onStockModifiedListener) {
             super(itemView);
             textViewItemName = (TextView) itemView.findViewById(R.id.textViewItemName);
             textViewStock = (TextView) itemView.findViewById(R.id.textViewStock);
             buttonAdd = (Button) itemView.findViewById(R.id.buttonAdd);
             buttonSubtract = (Button) itemView.findViewById(R.id.buttonSubtract);
             this.context = context;
-            this.listener = listener;
+            this.onStockModifiedListener = onStockModifiedListener;
         }
+
+
 
         public void loadItem(final Item item){
 
@@ -90,14 +101,14 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter implements View.On
                 @Override
                 public void onClick(View view) {
                     addOneToItem(item);
-                    listener.onClick(buttonAdd);
+                    onStockModifiedListener.onClick(buttonAdd);
                 }
             });
             buttonSubtract.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     substractOneFromItem(item);
-                    listener.onClick(buttonSubtract);
+                    onStockModifiedListener.onClick(buttonSubtract);
                 }
             });
 

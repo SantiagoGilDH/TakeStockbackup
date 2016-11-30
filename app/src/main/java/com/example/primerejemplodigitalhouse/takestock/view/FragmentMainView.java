@@ -50,16 +50,16 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
                     Item item = new Item(itemName);
                     itemsController.addItemToDatabase(view.getContext(), item);
                     Toast.makeText(view.getContext(), item.getName() + " has been added.", Toast.LENGTH_SHORT).show();
+
                     itemRecyclerAdapter.setItems(itemsController.getItems(getContext()));
                     itemRecyclerAdapter.notifyDataSetChanged();
-
 
                 }
             }
         });
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewItems);
-        itemRecyclerAdapter = new ItemRecyclerAdapter(itemsController.getItems(getContext()), getContext(), this);
+        itemRecyclerAdapter = new ItemRecyclerAdapter(itemsController.getItems(getContext()), getContext(), this, new ItemListener());
         recyclerView.setAdapter(itemRecyclerAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -74,6 +74,23 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
         itemRecyclerAdapter.setItems(itemsController.getItems(getContext()));
         itemRecyclerAdapter.notifyDataSetChanged();
         Toast.makeText(getContext(), "Se ha hecho Click", Toast.LENGTH_SHORT).show();
+    }
+
+    public interface FragmentActivityCommunicator {
+        void onItemTouched(Item touchedItem);
+    }
+
+    public class ItemListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            Integer touchedPosition = recyclerView.getChildAdapterPosition(view);
+            Item touchedItem = itemRecyclerAdapter.getItemAtPosition(touchedPosition);
+
+            FragmentActivityCommunicator fragmentActivityCommunicator = (FragmentActivityCommunicator) getActivity();
+            fragmentActivityCommunicator.onItemTouched(touchedItem);
+
+        }
     }
 }
 
