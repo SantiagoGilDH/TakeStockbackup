@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.FragmentItemDetail">
 
     <TextView
         android:id="@+id/textViewItemName"
@@ -27,27 +30,28 @@
             android:layout_margin="5dp"/>
 
         <ViewSwitcher
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/my_switcher"
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp">
 
             <TextView
                 android:id="@+id/clickableTextViewStock"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:textSize="24dp"
-                android:clickable="true"
-                android:onClick="TextViewClicked"
                 android:text="@string/lorem_ipsum"
                  />
 
             <EditText
                 android:id="@+id/hidden_edit_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
                 android:hint="@string/hint_name" />
+
         </ViewSwitcher>
 
     </LinearLayout>

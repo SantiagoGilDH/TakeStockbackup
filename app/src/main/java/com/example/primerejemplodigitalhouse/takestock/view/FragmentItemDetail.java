@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.example.primerejemplodigitalhouse.takestock.R;
@@ -19,7 +18,7 @@ public class FragmentItemDetail extends Fragment {
 
     private TextView textViewItemName;
     private TextView textViewItemStock;
-    private View view;
+    private View fragmentView;
 
     static final String STOCK = "stock";
     static final String NAME = "name";
@@ -28,24 +27,25 @@ public class FragmentItemDetail extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_item_detail, container, false);
+        fragmentView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
         Bundle bundle = getArguments();
 
-        textViewItemName = (TextView) view.findViewById(R.id.textViewItemName);
-        textViewItemStock = (TextView) view.findViewById(R.id.clickableTextViewStock);
+        textViewItemName = (TextView) fragmentView.findViewById(R.id.textViewItemName);
+        textViewItemStock = (TextView) fragmentView.findViewById(R.id.clickableTextViewStock);
 
         textViewItemName.setText(bundle.getString(NAME));
         textViewItemStock.setText(((Integer) bundle.getInt(STOCK)).toString());
 
-        return view;
-    }
+        textViewItemStock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewSwitcher switcher = (ViewSwitcher) fragmentView.findViewById(R.id.my_switcher);
+                switcher.showNext(); //or switcher.showPrevious();
+            }
+        });
 
-    public void TextViewClicked() {
-        ViewSwitcher switcher = (ViewSwitcher) view.findViewById(R.id.my_switcher);
-        switcher.showNext(); //or switcher.showPrevious();
-        TextView myTV = (TextView) switcher.findViewById(R.id.clickableTextViewStock);
-        myTV.setText("value");
+        return fragmentView;
     }
 
 
