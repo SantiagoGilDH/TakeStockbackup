@@ -35,7 +35,21 @@ public class MainActivityCommunicator extends AppCompatActivity implements Fragm
 
     @Override
     public void onItemTouched(Item touchedItem) {
-        Toast.makeText(MainActivityCommunicator.this, touchedItem.getName(), Toast.LENGTH_SHORT).show();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FragmentItemDetail.NAME, touchedItem.getName());
+        bundle.putInt(FragmentItemDetail.STOCK, touchedItem.getStock());
+
+        FragmentItemDetail fragmentItemDetail = new FragmentItemDetail();
+
+        fragmentItemDetail.setArguments(bundle);
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_holder, fragmentItemDetail);
+        fragmentTransaction.commit();
+
+
+        //Toast.makeText(MainActivityCommunicator.this, touchedItem.getName(), Toast.LENGTH_SHORT).show();
     }
 
 }

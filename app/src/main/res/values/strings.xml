@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Take Stock</string>
+    <string name="hint_name">Item name</string>
+    <string name="lorem_ipsum">Lorem Ipsum</string>
+    <string name="stock">Stock</string>
+    <string name="description">Description</string>
+
 </resources>
