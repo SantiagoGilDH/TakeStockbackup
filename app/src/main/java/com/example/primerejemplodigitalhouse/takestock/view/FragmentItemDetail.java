@@ -18,10 +18,14 @@ public class FragmentItemDetail extends Fragment {
 
     private TextView textViewItemName;
     private TextView textViewItemStock;
+    private TextView textViewMinimumPurchace;
+    private TextView textViewConsumptionRate;
     private View fragmentView;
 
     static final String STOCK = "stock";
     static final String NAME = "name";
+    static final String CONSUMPTION_RATE = "consumptionRate";
+    static final String MINIMUM_PURCHASE_QUANTITY = "minimumPurchaceQuantity";
 
 
     @Nullable
@@ -32,21 +36,17 @@ public class FragmentItemDetail extends Fragment {
         Bundle bundle = getArguments();
 
         textViewItemName = (TextView) fragmentView.findViewById(R.id.textViewItemName);
-        textViewItemStock = (TextView) fragmentView.findViewById(R.id.clickableTextViewStock);
+        textViewItemStock = (TextView) fragmentView.findViewById(R.id.textViewStock);
+        textViewConsumptionRate = (TextView) fragmentView.findViewById(R.id.textViewConsumptionRate);
+        textViewMinimumPurchace = (TextView) fragmentView.findViewById(R.id.textViewMinimumPurchaceAmmount);
+
 
         textViewItemName.setText(bundle.getString(NAME));
         textViewItemStock.setText(((Integer) bundle.getInt(STOCK)).toString());
-
-        textViewItemStock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ViewSwitcher switcher = (ViewSwitcher) fragmentView.findViewById(R.id.my_switcher);
-                switcher.showNext(); //or switcher.showPrevious();
-            }
-        });
+        textViewMinimumPurchace.setText(((Integer) bundle.getInt(MINIMUM_PURCHASE_QUANTITY)).toString());
+        textViewConsumptionRate.setText(((Integer) bundle.getInt(CONSUMPTION_RATE)).toString());
 
         return fragmentView;
     }
-
 
 }

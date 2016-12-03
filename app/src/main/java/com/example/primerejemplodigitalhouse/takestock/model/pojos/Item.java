@@ -2,21 +2,35 @@ package com.example.primerejemplodigitalhouse.takestock.model.pojos;
 
 public class Item {
 
+    static final Integer DEFAULT_CONSUMPTION_RATE = 90;
+
     private Integer ID;
     private String name;
     private Integer stock;
     private Integer minimumPurchaceQuantity;
     private Integer image;
+    private Integer consumptionRate;
 
 
     public Item(){
 
     }
 
+    public Integer getConsumptionRate() {
+        return consumptionRate;
+    }
+
+    public void setConsumptionRate(Integer consumptionRate) {
+        this.consumptionRate = consumptionRate;
+    }
+
     public Item(String name) {
         this.name = name;
+        consumptionRate =
         minimumPurchaceQuantity = 1;
         image = 0;
+        consumptionRate = DEFAULT_CONSUMPTION_RATE;
+
     }
 
     public String getName() {

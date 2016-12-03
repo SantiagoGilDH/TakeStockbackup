@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.primerejemplodigitalhouse.takestock.R;
 import com.example.primerejemplodigitalhouse.takestock.controller.ItemsController;
@@ -39,6 +37,8 @@ public class MainActivityCommunicator extends AppCompatActivity implements Fragm
         Bundle bundle = new Bundle();
         bundle.putString(FragmentItemDetail.NAME, touchedItem.getName());
         bundle.putInt(FragmentItemDetail.STOCK, touchedItem.getStock());
+        bundle.putInt(FragmentItemDetail.MINIMUM_PURCHASE_QUANTITY, touchedItem.getMinimumPurchaceQuantity());
+        bundle.putInt(FragmentItemDetail.CONSUMPTION_RATE, touchedItem.getConsumptionRate());
 
         FragmentItemDetail fragmentItemDetail = new FragmentItemDetail();
 
@@ -48,8 +48,6 @@ public class MainActivityCommunicator extends AppCompatActivity implements Fragm
         fragmentTransaction.replace(R.id.fragment_holder, fragmentItemDetail);
         fragmentTransaction.commit();
 
-
-        //Toast.makeText(MainActivityCommunicator.this, touchedItem.getName(), Toast.LENGTH_SHORT).show();
     }
 
 }

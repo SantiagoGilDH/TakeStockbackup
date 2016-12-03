@@ -1,3 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="8a36d229011e75f0caef408e1adf0d3fd4d94e02">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tasks-9.4.0_59cff88dad5596471e309ad720182c694e61bd63\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_c7479ac6c0cb00f12e333fa559c96f70a9e54a9e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.0.1_3820a4e5de3ff2bcd7c3b6719efdc2d31e71d413\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_46cc7322cbcac96bfd7da90fc69ec71da5bf8626\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\extras\android\m2repository\com\android\support\support-annotations\25.0.1\support-annotations-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.0.1_c8bf787256f0ccf285f90c45b2fa4ce719649a4a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.google.firebase\firebase-iid\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="3b7173b3df4c7029699919414400041f64519e34">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-iid-9.4.0_39c1d47fdf10ab4bf00efdf32c497d4c5e681c8e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_fa76b8c179ce871beaf0476f0e3e32371cfbd6a9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_9f1aeb57fa2170697511d54ab0bf9a4ed2e56d85\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="88848548ab56d4fbf3d2d1b0c85bf1ff9b4c1f4b">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-9.4.0_5c9c6454bedc5924c56746a0a1fd47904d24ec89\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="3dee4ce5844d39d843d503fb8fe04e51e5bfffac">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-9.4.0_3620009defe0f0f98f323215f4d6dd21b98018d7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="c5e6490573cd2cc8018417f60ddd251138b6ed61">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-24.2.1_b75f12de4a0002180aaf749799677b6c2cd616d1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.0.1_76d93d71a618b2010db2c3ba9cb2262bd63a8207\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="72e3948cd8973b7bf477a39f07d424fa60802e58">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_f0f01077cff3f7133d0f9c18f8ad2e6fe8754497\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_48e74d69575a7a3bf950bf011e7be7a950d991a1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.google.firebase\firebase-database-connection\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="0e4d53465cc141bec58f18a894e4c4e80633fa32">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-database-connection-9.4.0_9618c0c8e8d91ab563e74d60d098dd35af6d13a8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-25.0.1_218362e7b6c2a7aca8a25dfb98394fa041439eef\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="a9ae479702113fa5647c23a038147edd2ba45f3b">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_85b72cbbc1b2a317ba54b350e060e83768ae16a6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="18b5697c65c4fe5b7381613b8b8ae9ac52e26fa7">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-common-9.4.0_4a67ec81b994c16b47cc1bd6e5a98d14ba0424b4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics-impl\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="a440fb3fec30ff925e9f601cc458fb6671834cb2">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-impl-9.4.0_13a2e6f22946a26c72de57101e07c31a42fd5f91\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_ea361495524fc156f9ba726c286f5ffd4639586c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_b730e128c8bce30358484de5184c4ab2fba0a5e1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_3738555d15c29747f5758456f3c1ef83cd4953ec\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_10edd456eef27b5edfcb810ffcbc5dd8be620102\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_06103eaf30c44eaa623c411217d459657d8fa2d3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.google.firebase\firebase-database\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="84bf369090a8f7e293817efbd6ccf31ada1be32b">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-database-9.4.0_107734726179ed1459e0d0a81e30d385d9b44739\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="618485fef3ebe12127f7622abbc9b5b39057b5c2">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-9.4.0_6127378e628e175d9cce3d4e8be22efbfe447671\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_15bcdd9f1a88831c44350a3fbeb7cb4c4f357838\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_3a23bb115d3f23a6d5a835e1dfe185a60bdeab65\classes.dex" />
+    </item>
+
+</items>

@@ -95,6 +95,5 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
 }
 
 //TODO  quitar Appbar
-//TODO manejar comportamiento del teclado
 
 

@@ -26,6 +26,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
     private static final String NAME = "Name"  ;
     private static final String STOCK = "Stock" ;
     private static final String MINIMUMPURCHACEQUANTITY = "MinimumPurchaceQuantity" ;
+    private static final String CONSUMPTIONRATE = "ConsumptionRate";
     private static final String IMAGE = "Image" ;
 
     private static List<Item> items = new ArrayList<>();
@@ -43,6 +44,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
                 + NAME + " TEXT,"
                 + STOCK + " NUMBER,"
                 + IMAGE + " TEXT, "
+                + CONSUMPTIONRATE + " NUMBER, "
                 + MINIMUMPURCHACEQUANTITY + " NUMBER "
                 + ")";
 
@@ -74,6 +76,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
         row.put(STOCK, 0);
         row.put(IMAGE, item.getImage());
         row.put(MINIMUMPURCHACEQUANTITY, item.getMinimumPurchaceQuantity());
+        row.put(CONSUMPTIONRATE, item.getConsumptionRate());
 
         database.insert(TABLEITEMS, null, row);
         database.close();
@@ -95,6 +98,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
             item.setMinimumPurchaceQuantity(cursor.getInt(cursor.getColumnIndex(MINIMUMPURCHACEQUANTITY)));
             item.setName(cursor.getString(cursor.getColumnIndex(NAME)));
             item.setStock((Integer) cursor.getInt(cursor.getColumnIndex(STOCK)));
+            item.setConsumptionRate((Integer) cursor.getInt(cursor.getColumnIndex(CONSUMPTIONRATE)));
 
             items.add(item);
         }
