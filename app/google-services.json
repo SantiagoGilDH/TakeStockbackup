@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "720791584250",
+    "firebase_url": "https://take-stock.firebaseio.com",
+    "project_id": "take-stock",
+    "storage_bucket": "take-stock.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720791584250:android:e03136104b8750d7",
+        "android_client_info": {
+          "package_name": "com.example.primerejemplodigitalhouse.takestock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720791584250-bpjvmum568p953e4r3u7495rc5og9622.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.primerejemplodigitalhouse.takestock",
+            "certificate_hash": "04979B2E36A3FB65C80886842E7ABC0BFB95AD19"
+          }
+        },
+        {
+          "client_id": "720791584250-jbfkpkb6hiv74ug6290o7h6edur5a2f2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfbi48nqom2CcaPtXM98_K_OF36v_AxMs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720791584250-jbfkpkb6hiv74ug6290o7h6edur5a2f2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

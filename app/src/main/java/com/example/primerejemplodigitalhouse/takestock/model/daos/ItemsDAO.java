@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.primerejemplodigitalhouse.takestock.model.pojos.Item;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,11 @@ public class ItemsDAO extends SQLiteOpenHelper{
 
         sqLiteDatabase.execSQL(createTable);
 
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference();
+        List<Item> items = new ArrayList<>();
+        myRef.setValue(items);
+
     }
 
     @Override
@@ -54,6 +61,10 @@ public class ItemsDAO extends SQLiteOpenHelper{
     }
 
     public void addItemToDatabase(Item item) {
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference();
+        myRef.child("items").push().setValue(item);
 
         SQLiteDatabase database = getWritableDatabase();
 
