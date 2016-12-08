@@ -12,6 +12,7 @@ import com.example.primerejemplodigitalhouse.takestock.R;
 import com.example.primerejemplodigitalhouse.takestock.controller.ItemsController;
 import com.example.primerejemplodigitalhouse.takestock.model.pojos.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,11 +26,11 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter implements View.On
     private View.OnClickListener onStockModifiedListener;
     private View.OnClickListener onTouchedItemListener;
 
-    public ItemRecyclerAdapter(List<Item> items, Context context, View.OnClickListener onStockModifiedListener, View.OnClickListener onTouchedItemListener) {
-        this.items = items;
+    public ItemRecyclerAdapter(Context context, View.OnClickListener onStockModifiedListener, View.OnClickListener onTouchedItemListener) {
         this.context = context;
         this.onStockModifiedListener = onStockModifiedListener;
         this.onTouchedItemListener = onTouchedItemListener;
+        this.items = new ArrayList<>();
 
     }
 

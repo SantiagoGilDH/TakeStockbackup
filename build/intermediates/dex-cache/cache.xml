@@ -115,7 +115,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.1"
-        sha1="72e3948cd8973b7bf477a39f07d424fa60802e58">
+        sha1="11c3fc251fea707d5767f81ec7b97e383971aa92">
         <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_f0f01077cff3f7133d0f9c18f8ad2e6fe8754497\classes.dex" />
     </item>
     <item
@@ -151,7 +151,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.1"
-        sha1="a9ae479702113fa5647c23a038147edd2ba45f3b">
+        sha1="7efed693e1654ec3d41f12b903674c504f814d86">
         <dex dex="C:\Users\lab\Desktop\TakeStock\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_85b72cbbc1b2a317ba54b350e060e83768ae16a6\classes.dex" />
     </item>
     <item

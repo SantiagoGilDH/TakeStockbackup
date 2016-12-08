@@ -26,7 +26,7 @@ public class Item {
 
     public Item(String name) {
         this.name = name;
-        consumptionRate =
+        this.stock = 0;
         minimumPurchaceQuantity = 1;
         image = 0;
         consumptionRate = DEFAULT_CONSUMPTION_RATE;

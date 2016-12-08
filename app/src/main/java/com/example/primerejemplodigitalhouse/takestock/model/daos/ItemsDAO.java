@@ -5,10 +5,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.example.primerejemplodigitalhouse.takestock.model.pojos.Item;
+import com.example.primerejemplodigitalhouse.takestock.util.HTTPConnectionManager;
+import com.example.primerejemplodigitalhouse.takestock.util.ResultListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +36,13 @@ public class ItemsDAO extends SQLiteOpenHelper{
     private static final String CONSUMPTIONRATE = "ConsumptionRate";
     private static final String IMAGE = "Image" ;
 
-    private static List<Item> items = new ArrayList<>();
-    private static Context context;
+    private List<Item> items = new ArrayList<>();
+    private Context context;
+    private HTTPConnectionManager httpConnectionManager;
 
     public ItemsDAO (Context context){
         super(context, DATABASENAME, null, DATABASEVERSION);
+        httpConnectionManager = new HTTPConnectionManager();
     }
 
     @Override
@@ -50,11 +59,6 @@ public class ItemsDAO extends SQLiteOpenHelper{
 
         sqLiteDatabase.execSQL(createTable);
 
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference();
-        List<Item> items = new ArrayList<>();
-        myRef.setValue(items);
-
     }
 
     @Override
@@ -62,11 +66,30 @@ public class ItemsDAO extends SQLiteOpenHelper{
 
     }
 
-    public void addItemToDatabase(Item item) {
+    public void addItemToDatabases(final Item item) {
+
+        AsyncTask asyncTask = new AsyncTask<String, Void, Void>(){
+            @Override
+            protected Void doInBackground(String... strings) {
+
+                addItemToFirebase(item);
+
+                return null;
+            }
+        };
+
+        asyncTask.execute();
+        addItemToLocalDB(item);
+    }
+
+    public void addItemToFirebase(Item item){
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference();
-        myRef.child("items").push().setValue(item);
+        myRef.child("items").child(item.getName()).setValue(item);
+    };
+
+    public void addItemToLocalDB(Item item){
 
         SQLiteDatabase database = getWritableDatabase();
 
@@ -82,7 +105,14 @@ public class ItemsDAO extends SQLiteOpenHelper{
         database.close();
     }
 
-    public List<Item> getItems(){
+    public void getItemsFromFirebase(final ResultListener<List<Item>> listenerFromController){
+
+        RetrieveItemsFromFirebaseAsync retrieveItemsFromFirebaseAsync = new RetrieveItemsFromFirebaseAsync(listenerFromController);
+        retrieveItemsFromFirebaseAsync.execute();
+
+    }
+
+    public void getItemsFromLocalDB(final ResultListener<List<Item>> litenerFromController) {
 
         SQLiteDatabase database = getReadableDatabase();
 
@@ -90,7 +120,35 @@ public class ItemsDAO extends SQLiteOpenHelper{
         Cursor cursor = database.rawQuery(selectQuery, null);
 
         List<Item> items = new ArrayList<>();
-        while (cursor.moveToNext()){
+
+        while (cursor.moveToNext()) {
+
+        Item item = new Item();
+        item.setID(cursor.getInt(cursor.getColumnIndex(ID)));
+        item.setImage(cursor.getInt(cursor.getColumnIndex(IMAGE)));
+        item.setMinimumPurchaceQuantity(cursor.getInt(cursor.getColumnIndex(MINIMUMPURCHACEQUANTITY)));
+        item.setName(cursor.getString(cursor.getColumnIndex(NAME)));
+        item.setStock((Integer) cursor.getInt(cursor.getColumnIndex(STOCK)));
+        item.setConsumptionRate((Integer) cursor.getInt(cursor.getColumnIndex(CONSUMPTIONRATE)));
+
+        items.add(item);
+
+        }
+
+        database.close();
+        litenerFromController.finish(items);
+    }
+
+    public List<Item> getItemsFromLocalDB() {
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLEITEMS;
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        List<Item> items = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
 
             Item item = new Item();
             item.setID(cursor.getInt(cursor.getColumnIndex(ID)));
@@ -101,34 +159,115 @@ public class ItemsDAO extends SQLiteOpenHelper{
             item.setConsumptionRate((Integer) cursor.getInt(cursor.getColumnIndex(CONSUMPTIONRATE)));
 
             items.add(item);
+
         }
 
         database.close();
         return items;
-     }
+    }
 
-    public void addOneToItem(Item item){
+    public void increaseItemStock(Item item){
+
+        Integer newStock = item.getStock() + 1;
+
+        updateItemStock(item, newStock);
+
+    }
+
+    public void decreaseItemStock(Item item){
+
+        Integer newStock = item.getStock() - 1;
+
+        updateItemStock(item, newStock);
+
+    }
+
+    public void updateItemStock(final Item item, final Integer newStock){
+
+
+        UpdateItemStockFirebase updateItemStockFirebase = new UpdateItemStockFirebase(item, newStock);
+
+        updateItemStockFirebase.execute();
 
         SQLiteDatabase database = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(STOCK, item.getStock() + 1);
+        contentValues.put(STOCK, newStock);
 
         database.update(TABLEITEMS,  contentValues, ID + " = " + item.getID(), null);
 
         database.close();
+
     }
 
-    public void substractOneFromItem(Item item){
+    private class RetrieveItemsFromFirebaseAsync extends AsyncTask<String, Void, List<Item>>{
 
-        SQLiteDatabase database = getWritableDatabase();
+        private ResultListener<List<Item>> listenerFromController;
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(STOCK, item.getStock() - 1);
+        public RetrieveItemsFromFirebaseAsync(ResultListener<List<Item>> listenerFromController) {
+            this.listenerFromController = listenerFromController;
+        }
 
-        database.update(TABLEITEMS, contentValues, ID + " = " + item.getID(), null);
+        @Override
+        protected List<Item> doInBackground(String... strings) {
 
-        database.close();
+            final List<Item> items = new ArrayList<>();
 
+            try{
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference dbRef = firebaseDatabase.getReference().child("items");
+
+                dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot data : dataSnapshot.getChildren()){
+                            Item item = data.getValue(Item.class);
+                            items.add(item);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                        Toast.makeText(context, "itemsDAO.getItemsFromFirebase FAILED", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            return items;
+        }
+
+        @Override
+        protected void onPostExecute(List<Item> items) {
+            listenerFromController.finish(items);
+        }
+    }
+
+    private class UpdateItemStockFirebase extends AsyncTask<String, Void, Void>{
+
+        private Item item;
+        private Integer newStock;
+
+        public UpdateItemStockFirebase(Item item, Integer newStock) {
+            this.item = item;
+            this.newStock = newStock;
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+            firebaseDatabase.getReference().child("items").child(item.getName()).child("stock").setValue(newStock);
+            return null;
+        }
     }
  }
+
+// TODO : si no hay internet, buscar datos de base de datos
+// TODO : si la base de datos está vacía, buscar datos de firebase
+// TODO: actualizar firebase al incrementar o disminuir el stock de un item.
+

@@ -1,6 +1,5 @@
 package com.example.primerejemplodigitalhouse.takestock.view;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,9 @@ import android.widget.Toast;
 import com.example.primerejemplodigitalhouse.takestock.R;
 import com.example.primerejemplodigitalhouse.takestock.controller.ItemsController;
 import com.example.primerejemplodigitalhouse.takestock.model.pojos.Item;
+import com.example.primerejemplodigitalhouse.takestock.util.ResultListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_main_view, container, false);
         itemsController = new ItemsController();
@@ -44,23 +45,27 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
             public void onClick(View view) {
                 if(editText.getText().toString().equals("")){
                     Toast.makeText(view.getContext(), "Write an item name", Toast.LENGTH_SHORT).show();
-                } else{
+                } else {
                     String itemName = editText.getText().toString();
                     editText.setText("");
                     Item item = new Item(itemName);
-                    itemsController.addItemToDatabase(view.getContext(), item);
+                    itemsController.addItemToDatabases(view.getContext(), item);
                     Toast.makeText(view.getContext(), item.getName() + " has been added.", Toast.LENGTH_SHORT).show();
 
-                    itemRecyclerAdapter.setItems(itemsController.getItems(getContext()));
+                    itemRecyclerAdapter.setItems(itemsController.getItemsFromLocalDatabase(getContext()));
                     itemRecyclerAdapter.notifyDataSetChanged();
-
                 }
             }
         });
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewItems);
-        itemRecyclerAdapter = new ItemRecyclerAdapter(itemsController.getItems(getContext()), getContext(), this, new ItemListener());
+        itemRecyclerAdapter = new ItemRecyclerAdapter(getContext(), this, new ItemListener());
+
+        updateRecyclerAdapter();
+
         recyclerView.setAdapter(itemRecyclerAdapter);
+        itemRecyclerAdapter.setItems(new ArrayList<Item>());
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -71,9 +76,8 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        itemRecyclerAdapter.setItems(itemsController.getItems(getContext()));
+        itemRecyclerAdapter.setItems(itemsController.getItemsFromLocalDatabase(getContext()));
         itemRecyclerAdapter.notifyDataSetChanged();
-        Toast.makeText(getContext(), "Se ha hecho Click", Toast.LENGTH_SHORT).show();
     }
 
     public interface FragmentActivityCommunicator {
@@ -91,6 +95,24 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
             fragmentActivityCommunicator.onItemTouched(touchedItem);
 
         }
+    }
+
+    public void updateRecyclerAdapter (){
+
+        itemsController.getItems(getContext(), new ResultListener<List<Item>>() {
+            @Override
+            public void finish(List<Item> result) {
+
+                itemRecyclerAdapter.setItems(result);
+                itemRecyclerAdapter.notifyDataSetChanged();
+
+                if(itemsController.getItemsFromLocalDatabase(getContext()).size() == 0) {
+                    for (Item item : result){
+                        itemsController.addItemToLocalDatabase(getContext(), item);
+                    }
+                };
+            }
+        });
     }
 }
 
