@@ -87,7 +87,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
         ContentValues row = new ContentValues();
 
         row.put(NAME, item.getName());
-        row.put(STOCK, 0);
+        row.put(STOCK, item.getStock());
         row.put(IMAGE, item.getImage());
         row.put(MINIMUMPURCHACEQUANTITY, item.getMinimumPurchaceQuantity());
         row.put(CONSUMPTIONRATE, item.getConsumptionRate());
@@ -291,6 +291,12 @@ public class ItemsDAO extends SQLiteOpenHelper{
             addItemToFirebase(item);
 
             return null;
+        }
+    }
+
+    public void addItemsToLocalDatabase(List<Item> items){
+        for (Item item : items){
+            addItemToDatabases(item);
         }
     }
 

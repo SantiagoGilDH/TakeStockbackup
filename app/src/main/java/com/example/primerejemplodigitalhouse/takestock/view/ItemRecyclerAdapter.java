@@ -99,7 +99,6 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter implements View.On
 
         public void loadItem(final Item item){
 
-            this.item = item;
             textViewItemName.setText(item.getName());
             textViewStock.setText(item.getStock().toString());
             buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -121,16 +120,14 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter implements View.On
 
         public  void increaseItemStock(Item item){
 
-            item.setStock(item.getStock() + 1);
             ItemsController itemsController = new ItemsController();
-            itemsController.addOneToItem(context, item);
+            itemsController.increaseItemStock(context, item);
 
         }
 
         public void decreaseItemStock(Item item){
-            item.setStock(item.getStock() - 1);
             ItemsController itemsController = new ItemsController();
-            itemsController.substractOneFromItem(context, item);
+            itemsController.decreaseItemStock(context, item);
         }
 
 

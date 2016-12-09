@@ -14,47 +14,45 @@ import java.util.List;
  */
 public class ItemsController {
 
-    private HTTPConnectionManager httpConnectionManager;
+    public void getItems(final Context context, final ResultListener<List<Item>> listenerFromView) {
+        final ItemsDAO itemsDao = new ItemsDAO(context);
 
-    public ItemsController() {
-        this.httpConnectionManager = new HTTPConnectionManager();
+        itemsDao.getItemsFromLocalDB(new ResultListener<List<Item>>() {
+            @Override
+            public void finish(List<Item> result) {
+
+                if (result.size() > 0) {
+
+                    listenerFromView.finish(result);
+
+                } else {
+                    itemsDao.getItemsFromFirebase(new ResultListener<List<Item>>() {
+                        @Override
+                        public void finish(List<Item> result) {
+                            itemsDao.addItemsToLocalDatabase(result);
+                            listenerFromView.finish(result);
+                        }
+                    });
+                }
+            }
+        });
     }
 
-    public void getItems(Context context, final ResultListener<List<Item>> listenerFromView){
-        ItemsDAO itemsDao = new ItemsDAO(context);
 
-        if (httpConnectionManager.isNetworkingOnline(context)){
-
-            itemsDao.getItemsFromFirebase(new ResultListener<List<Item>>() {
-                @Override
-                public void finish(List<Item> result) {
-                    listenerFromView.finish(result);
-                }
-            });
-
-        } else {
-            itemsDao.getItemsFromLocalDB(new ResultListener<List<Item>>() {
-                @Override
-                public void finish(List<Item> result) {
-                    listenerFromView.finish(result);
-                }
-            });
-        }
-    }
 
     public void addItemToDatabases(Context context, Item item){
         ItemsDAO itemsDao = new ItemsDAO(context);
         itemsDao.addItemToDatabases(item);
     }
 
-    public void addOneToItem(Context context, Item item){
+    public void increaseItemStock(Context context, Item item){
 
         ItemsDAO itemsDao = new ItemsDAO(context);
         itemsDao.increaseItemStock(item);
 
     }
 
-    public void substractOneFromItem(Context context, Item item){
+    public void decreaseItemStock(Context context, Item item){
 
         ItemsDAO itemsDAO = new ItemsDAO(context);
         itemsDAO.decreaseItemStock(item);

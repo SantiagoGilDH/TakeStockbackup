@@ -50,7 +50,7 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
 
                 //updateRecyclerAdapter();
 
-                recyclerView.setAdapter(itemRecyclerAdapter);
+        recyclerView.setAdapter(itemRecyclerAdapter);
         //itemRecyclerAdapter.setItems(new ArrayList<Item>());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -83,7 +83,7 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        //itemRecyclerAdapter.setItems(itemsController.getItemsFromLocalDatabase(getContext()));
+        itemRecyclerAdapter.setItems(itemsController.getItemsFromLocalDatabase(getContext()));
         itemRecyclerAdapter.notifyDataSetChanged();
     }
 
