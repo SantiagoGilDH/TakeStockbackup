@@ -68,17 +68,8 @@ public class ItemsDAO extends SQLiteOpenHelper{
 
     public void addItemToDatabases(final Item item) {
 
-        AsyncTask asyncTask = new AsyncTask<String, Void, Void>(){
-            @Override
-            protected Void doInBackground(String... strings) {
-
-                addItemToFirebase(item);
-
-                return null;
-            }
-        };
-
-        asyncTask.execute();
+        AddItemToFirebaseTask addItemToFirebaseTask = new AddItemToFirebaseTask(item);
+        addItemToFirebaseTask.execute();
         addItemToLocalDB(item);
     }
 
@@ -107,8 +98,29 @@ public class ItemsDAO extends SQLiteOpenHelper{
 
     public void getItemsFromFirebase(final ResultListener<List<Item>> listenerFromController){
 
-        RetrieveItemsFromFirebaseAsync retrieveItemsFromFirebaseAsync = new RetrieveItemsFromFirebaseAsync(listenerFromController);
-        retrieveItemsFromFirebaseAsync.execute();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference dbRef = firebaseDatabase.getReference().child("items");
+
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener()   {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()){
+                    Item item = data.getValue(Item.class);
+                    items.add(item);
+                    listenerFromController.finish(items);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                Toast.makeText(context, "itemsDAO.getItemsFromFirebase FAILED", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //RetrieveItemsFromFirebaseAsync retrieveItemsFromFirebaseAsync = new RetrieveItemsFromFirebaseAsync(listenerFromController);
+        //retrieveItemsFromFirebaseAsync.execute();
 
     }
 
@@ -217,7 +229,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference dbRef = firebaseDatabase.getReference().child("items");
 
-                dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                dbRef.addListenerForSingleValueEvent(new ValueEventListener()   {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot data : dataSnapshot.getChildren()){
@@ -265,6 +277,23 @@ public class ItemsDAO extends SQLiteOpenHelper{
             return null;
         }
     }
+
+    private class AddItemToFirebaseTask extends AsyncTask <String, Void, Void>{
+
+        private Item item;
+
+        public AddItemToFirebaseTask(Item item) {
+            this.item = item;
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            addItemToFirebase(item);
+
+            return null;
+        }
+    }
+
  }
 
 // TODO : si no hay internet, buscar datos de base de datos

@@ -26,6 +26,10 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter implements View.On
     private View.OnClickListener onStockModifiedListener;
     private View.OnClickListener onTouchedItemListener;
 
+    public List<Item> getItems() {
+        return items;
+    }
+
     public ItemRecyclerAdapter(Context context, View.OnClickListener onStockModifiedListener, View.OnClickListener onTouchedItemListener) {
         this.context = context;
         this.onStockModifiedListener = onStockModifiedListener;
@@ -101,29 +105,30 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter implements View.On
             buttonAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    addOneToItem(item);
+                    increaseItemStock(item);
                     onStockModifiedListener.onClick(buttonAdd);
                 }
             });
             buttonSubtract.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    substractOneFromItem(item);
+                    decreaseItemStock(item);
                     onStockModifiedListener.onClick(buttonSubtract);
                 }
             });
 
         }
 
-        public  void addOneToItem(Item item){
+        public  void increaseItemStock(Item item){
 
+            item.setStock(item.getStock() + 1);
             ItemsController itemsController = new ItemsController();
             itemsController.addOneToItem(context, item);
 
         }
 
-        public void substractOneFromItem(Item item){
-
+        public void decreaseItemStock(Item item){
+            item.setStock(item.getStock() - 1);
             ItemsController itemsController = new ItemsController();
             itemsController.substractOneFromItem(context, item);
         }

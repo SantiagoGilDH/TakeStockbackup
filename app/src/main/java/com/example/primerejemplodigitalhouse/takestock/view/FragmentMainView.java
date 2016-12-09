@@ -37,6 +37,26 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_main_view, container, false);
         itemsController = new ItemsController();
 
+
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewItems);
+        itemRecyclerAdapter = new ItemRecyclerAdapter(getContext(), this, new ItemListener());
+        itemsController.getItems(getContext(), new ResultListener<List<Item>>() {
+                    @Override
+                    public void finish(List<Item> result) {
+                        itemRecyclerAdapter.setItems(result);
+                    }
+                });
+
+                //updateRecyclerAdapter();
+
+                recyclerView.setAdapter(itemRecyclerAdapter);
+        //itemRecyclerAdapter.setItems(new ArrayList<Item>());
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
         Button buttonNewItem = (Button) view.findViewById(R.id.buttonNewItem);
         editText = (EditText) view.findViewById(R.id.editText);
 
@@ -51,24 +71,11 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
                     Item item = new Item(itemName);
                     itemsController.addItemToDatabases(view.getContext(), item);
                     Toast.makeText(view.getContext(), item.getName() + " has been added.", Toast.LENGTH_SHORT).show();
-
-                    itemRecyclerAdapter.setItems(itemsController.getItemsFromLocalDatabase(getContext()));
+                    itemRecyclerAdapter.getItems().add(item);
                     itemRecyclerAdapter.notifyDataSetChanged();
                 }
             }
         });
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewItems);
-        itemRecyclerAdapter = new ItemRecyclerAdapter(getContext(), this, new ItemListener());
-
-        updateRecyclerAdapter();
-
-        recyclerView.setAdapter(itemRecyclerAdapter);
-        itemRecyclerAdapter.setItems(new ArrayList<Item>());
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
 
         return view;
 
@@ -76,7 +83,7 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        itemRecyclerAdapter.setItems(itemsController.getItemsFromLocalDatabase(getContext()));
+        //itemRecyclerAdapter.setItems(itemsController.getItemsFromLocalDatabase(getContext()));
         itemRecyclerAdapter.notifyDataSetChanged();
     }
 
