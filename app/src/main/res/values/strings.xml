@@ -6,5 +6,7 @@
     <string name="description">Description: </string>
     <string name="consumption_rate">Consumption Rate: </string>
     <string name="minimum_purchace_ammount">Minimum Purchace: </string>
+    <string name="add_item">Add</string>
+
 
 </resources>

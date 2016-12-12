@@ -17,7 +17,6 @@ import com.example.primerejemplodigitalhouse.takestock.controller.ItemsControlle
 import com.example.primerejemplodigitalhouse.takestock.model.pojos.Item;
 import com.example.primerejemplodigitalhouse.takestock.util.ResultListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +26,7 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
 
     private ItemsController itemsController;
     private RecyclerView recyclerView;
-    private EditText editText;
+    private EditText editTextAddItem;
     private ItemRecyclerAdapter itemRecyclerAdapter;
 
     @Nullable
@@ -58,22 +57,18 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
         recyclerView.setLayoutManager(linearLayoutManager);
 
         Button buttonNewItem = (Button) view.findViewById(R.id.buttonNewItem);
-        editText = (EditText) view.findViewById(R.id.editText);
+        editTextAddItem = (EditText) view.findViewById(R.id.editText);
 
         buttonNewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(editText.getText().toString().equals("")){
+                if(editTextAddItem.getText().toString().equals("")){
                     Toast.makeText(view.getContext(), "Write an item name", Toast.LENGTH_SHORT).show();
                 } else {
-                    String itemName = editText.getText().toString();
-                    editText.setText("");
-                    Item item = new Item(itemName);
-                    itemsController.addItemToDatabases(view.getContext(), item);
-                    Toast.makeText(view.getContext(), item.getName() + " has been added.", Toast.LENGTH_SHORT).show();
-                    itemRecyclerAdapter.getItems().add(item);
-                    itemRecyclerAdapter.notifyDataSetChanged();
+                    addNewItem(view);
                 }
+
+                editTextAddItem.clearFocus();
             }
         });
 
@@ -120,6 +115,20 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
                 };
             }
         });
+    }
+
+    public void addIDsToItems(){
+
+    }
+
+    public void addNewItem(View view){
+        String itemName = editTextAddItem.getText().toString();
+        editTextAddItem.setText("");
+        Item item = new Item(itemName);
+        itemsController.addItemToDatabases(view.getContext(), item);
+        Toast.makeText(view.getContext(), item.getName() + " has been added.", Toast.LENGTH_SHORT).show();
+        itemRecyclerAdapter.getItems().add(item);
+        itemRecyclerAdapter.notifyDataSetChanged();
     }
 }
 

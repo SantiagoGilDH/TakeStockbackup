@@ -20,7 +20,7 @@
             android:id="@+id/buttonNewItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nuevo"
+            android:text="@string/add_item"
             android:layout_weight="2"
             />
 
