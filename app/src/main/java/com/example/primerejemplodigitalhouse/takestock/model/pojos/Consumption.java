@@ -14,9 +14,4 @@ public class Consumption {
         this.quantity = quantity;
     }
 
-    public void reduceStock(){
-        item.setStock(item.getStock() - quantity);
-    }
-
-
 }

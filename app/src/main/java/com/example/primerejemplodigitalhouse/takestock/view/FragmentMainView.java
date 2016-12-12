@@ -16,6 +16,8 @@ import com.example.primerejemplodigitalhouse.takestock.R;
 import com.example.primerejemplodigitalhouse.takestock.controller.ItemsController;
 import com.example.primerejemplodigitalhouse.takestock.model.pojos.Item;
 import com.example.primerejemplodigitalhouse.takestock.util.ResultListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -117,9 +119,7 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
         });
     }
 
-    public void addIDsToItems(){
 
-    }
 
     public void addNewItem(View view){
         String itemName = editTextAddItem.getText().toString();

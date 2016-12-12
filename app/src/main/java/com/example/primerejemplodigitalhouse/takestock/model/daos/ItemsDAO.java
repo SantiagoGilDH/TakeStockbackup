@@ -68,9 +68,9 @@ public class ItemsDAO extends SQLiteOpenHelper{
 
     public void addItemToDatabases(final Item item) {
 
-        AddItemToFirebaseTask addItemToFirebaseTask = new AddItemToFirebaseTask(item);
-        addItemToFirebaseTask.execute();
         addItemToLocalDB(item);
+        AddItemToFirebaseTask addItemToFirebaseTask = new AddItemToFirebaseTask(getItemFromLocalDB(item.getName()));
+        addItemToFirebaseTask.execute();
     }
 
     public void addItemToFirebase(Item item){
@@ -93,7 +93,32 @@ public class ItemsDAO extends SQLiteOpenHelper{
         row.put(CONSUMPTIONRATE, item.getConsumptionRate());
 
         database.insert(TABLEITEMS, null, row);
+
         database.close();
+    }
+
+    public Item getItemFromLocalDB(String itemName){
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLEITEMS + " WHERE " + NAME + " = " + '"'
+                +  itemName + '"';
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToNext()){
+
+            Item item = new Item();
+            item.setID(cursor.getInt(cursor.getColumnIndex(ID)));
+            item.setImage(cursor.getInt(cursor.getColumnIndex(IMAGE)));
+            item.setMinimumPurchaceQuantity(cursor.getInt(cursor.getColumnIndex(MINIMUMPURCHACEQUANTITY)));
+            item.setName(cursor.getString(cursor.getColumnIndex(NAME)));
+            item.setStock((Integer) cursor.getInt(cursor.getColumnIndex(STOCK)));
+            item.setConsumptionRate((Integer) cursor.getInt(cursor.getColumnIndex(CONSUMPTIONRATE)));
+
+            return item;
+
+        }
+
+        return null;
     }
 
     public void getItemsFromFirebase(final ResultListener<List<Item>> listenerFromController){
