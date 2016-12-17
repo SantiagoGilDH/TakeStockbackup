@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.example.primerejemplodigitalhouse.takestock.model.pojos.Item;
+import com.example.primerejemplodigitalhouse.takestock.util.DAOException;
 import com.example.primerejemplodigitalhouse.takestock.util.HTTPConnectionManager;
 import com.example.primerejemplodigitalhouse.takestock.util.ResultListener;
 import com.google.firebase.database.DataSnapshot;
@@ -77,7 +78,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference();
-        myRef.child("items").child(item.getName()).setValue(item);
+        myRef.child("items").child(item.getID().toString()).setValue(item);
     };
 
     public void addItemToLocalDB(Item item){
@@ -165,8 +166,8 @@ public class ItemsDAO extends SQLiteOpenHelper{
         item.setImage(cursor.getInt(cursor.getColumnIndex(IMAGE)));
         item.setMinimumPurchaceQuantity(cursor.getInt(cursor.getColumnIndex(MINIMUMPURCHACEQUANTITY)));
         item.setName(cursor.getString(cursor.getColumnIndex(NAME)));
-        item.setStock((Integer) cursor.getInt(cursor.getColumnIndex(STOCK)));
-        item.setConsumptionRate((Integer) cursor.getInt(cursor.getColumnIndex(CONSUMPTIONRATE)));
+        item.setStock(cursor.getInt(cursor.getColumnIndex(STOCK)));
+        item.setConsumptionRate(cursor.getInt(cursor.getColumnIndex(CONSUMPTIONRATE)));
 
         items.add(item);
 
@@ -298,7 +299,7 @@ public class ItemsDAO extends SQLiteOpenHelper{
         protected Void doInBackground(String... strings) {
 
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-            firebaseDatabase.getReference().child("items").child(item.getName()).child("stock").setValue(newStock);
+            firebaseDatabase.getReference().child("items").child(item.getID().toString()).child("stock").setValue(newStock);
             return null;
         }
     }
@@ -322,6 +323,25 @@ public class ItemsDAO extends SQLiteOpenHelper{
     public void addItemsToLocalDatabase(List<Item> items){
         for (Item item : items){
             addItemToDatabases(item);
+        }
+    }
+
+    public void deleteItemFromDatabases(Integer ID){
+
+        deleteItemFromLocalDB(ID);
+
+    }
+
+    public void deleteItemFromLocalDB(Integer ID){
+
+        SQLiteDatabase database = getWritableDatabase();
+
+        try {
+            database.delete(TABLEITEMS, ItemsDAO.ID + " = " + ID, null);
+        } catch (Exception e){
+
+            e.printStackTrace();
+
         }
     }
 

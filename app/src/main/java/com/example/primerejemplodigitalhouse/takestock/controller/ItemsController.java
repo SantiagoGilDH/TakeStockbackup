@@ -38,6 +38,12 @@ public class ItemsController {
         });
     }
 
+    public void deleteItemFromDatabases(Context context, Integer ID){
+        ItemsDAO itemsDAO = new ItemsDAO(context);
+        itemsDAO.deleteItemFromDatabases(ID);
+
+    }
+
 
 
     public void addItemToDatabases(Context context, Item item){

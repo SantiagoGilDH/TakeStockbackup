@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.primerejemplodigitalhouse.takestock.R;
 import com.example.primerejemplodigitalhouse.takestock.controller.ItemsController;
@@ -13,10 +14,20 @@ import com.example.primerejemplodigitalhouse.takestock.model.pojos.Item;
 
 import java.util.List;
 
-public class MainActivityCommunicator extends AppCompatActivity implements FragmentMainView.FragmentActivityCommunicator {
+public class MainActivityCommunicator extends AppCompatActivity implements FragmentMainView.FragmentActivityCommunicator, FragmentItemDetail.FragmentActivityCommunicator {
 
     private ItemsController itemsController;
     private List<Item> items;
+
+    @Override
+    public void refreshFragmentMainView() {
+
+        Fragment fragmentMainView = new FragmentMainView();
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_holder, fragmentMainView);
+        fragmentTransaction.commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +45,7 @@ public class MainActivityCommunicator extends AppCompatActivity implements Fragm
     @Override
     public void onItemTouched(Item touchedItem) {
 
-        Bundle bundle = new Bundle();
-        bundle.putString(FragmentItemDetail.NAME, touchedItem.getName());
-        bundle.putInt(FragmentItemDetail.STOCK, touchedItem.getStock());
-        bundle.putInt(FragmentItemDetail.MINIMUM_PURCHASE_QUANTITY, touchedItem.getMinimumPurchaceQuantity());
-        bundle.putInt(FragmentItemDetail.CONSUMPTION_RATE, touchedItem.getConsumptionRate());
-
-        FragmentItemDetail fragmentItemDetail = new FragmentItemDetail();
-
-        fragmentItemDetail.setArguments(bundle);
+        FragmentItemDetail fragmentItemDetail = FragmentItemDetail.provideFragment(touchedItem);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_holder, fragmentItemDetail);
@@ -50,4 +53,8 @@ public class MainActivityCommunicator extends AppCompatActivity implements Fragm
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

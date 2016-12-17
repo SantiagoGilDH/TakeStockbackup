@@ -38,8 +38,6 @@ public class FragmentMainView extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_main_view, container, false);
         itemsController = new ItemsController();
 
-
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewItems);
         itemRecyclerAdapter = new ItemRecyclerAdapter(getContext(), this, new ItemListener());
         itemsController.getItems(getContext(), new ResultListener<List<Item>>() {
